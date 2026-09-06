@@ -1,10 +1,12 @@
 {
-  "addon": {
+  "manifest": {
+    "id": "qobuz",
     "name": "Qobuz Hi-Res",
     "version": "1.0.0",
     "description": "Addon for streaming and downloading Qobuz tracks in high-resolution FLAC.",
+    "type": "source",
     "source": {
-      "type": "http",
+      "protocol": "http",
       "base_url": "https://www.qobuz.com/api.json/0.2/",
       "endpoints": {
         "track_metadata": "track/get?track_id={id}&app_id={app_id}",
