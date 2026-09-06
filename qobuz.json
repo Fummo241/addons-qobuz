@@ -1,0 +1,50 @@
+{
+  "name": "Qobuz Hi-Res",
+  "version": "1.0.0",
+  "description": "Addon for streaming and downloading Qobuz tracks in high-resolution FLAC.",
+  "source": {
+    "type": "http",
+    "base_url": "https://www.qobuz.com/api.json/0.2/",
+    "endpoints": {
+      "track_metadata": "track/get?track_id={id}&app_id={app_id}",
+      "album_metadata": "album/get?album_id={id}&app_id={app_id}",
+      "artist_metadata": "artist/get?artist_id={id}&extra=albums&app_id={app_id}",
+      "playlist_metadata": "playlist/get?playlist_id={id}&extra=tracks&app_id={app_id}",
+      "search": "track/search?query={query}&limit=20&app_id={app_id}",
+      "stream_url": "track/getFileUrl"
+    }
+  },
+  "auth": {
+    "app_id": "798273057",
+    "app_secret": "<YOUR_QOBUZ_SECRET>",
+    "user_auth_token": "<OPTIONAL_USER_TOKEN>"
+  },
+  "signing": {
+    "method": "md5",
+    "function": "signTrackStreamUrl",
+    "params": [
+      "track_id",
+      "format_id",
+      "app_secret",
+      "request_ts"
+    ]
+  },
+  "formats": {
+    "5": { "name": "MP3", "bitrate": "320kbps" },
+    "6": { "name": "FLAC 16-bit", "bitrate": "CD Quality" },
+    "7": { "name": "FLAC 24-bit/96kHz", "bitrate": "Hi-Res" },
+    "27": { "name": "FLAC 24-bit/192kHz", "bitrate": "Studio Master" }
+  },
+  "output_mapping": {
+    "audio_url": "url",
+    "bit_depth": "bit_depth",
+    "sampling_rate": "sampling_rate",
+    "format_id": "format_id",
+    "tags": {
+      "artist": "track.artist.name",
+      "album": "track.album.title",
+      "title": "track.title",
+      "cover": "track.album.image.large"
+    }
+  }
+}
